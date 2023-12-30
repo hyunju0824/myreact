@@ -1,5 +1,6 @@
 import './App.css';
 import MyJson from './myJson.json';
+import axios from 'axios';
 // 유효성 검사 구성 요소
 
 function App() {
