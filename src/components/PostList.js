@@ -12,22 +12,31 @@ export default function  PostList({ data }) {
 
     function TabContent(props){
       if(props.currentTab === 0){
-        return <div>Tab 1 내용입니다.</div>
+        return <div>{posts && posts.map((post, index) => (
+          <div key={index}>
+          <h2>{post.title} 꺄하하하하</h2>
+          </div>
+      ))}</div>
       }else if(props.currentTab === 1) {
-        return <div>Tab 2 내용입니다.</div>
+        return <div>{posts && posts.filter(post => !post.completed).map((post, index) => (
+                  <div key={index}>
+                      <h2>{post.title}작성중이욤</h2>
+                  </div>
+              ))}
+          </div>
       }else if(props.currentTab === 2){
-        return <div>Tab 3 내용입니다.</div>
+        return <div>{posts && posts.filter(post => post.completed).map((post, index) => (
+          <div key={index}>
+              <h2>{post.title}작성완료</h2>
+          </div>
+      ))}
+      </div>
       }
     }
 
 
     return (
         <div>
-        {posts && posts.map((post, index) => (
-            <div key={index}>
-            <h2>{post.title}</h2>
-            </div>
-        ))}
         
         <Nav className="mt-5 mb-3" variant="tabs" defaultActiveKey="link-0">
           <Nav.Item>
@@ -43,7 +52,11 @@ export default function  PostList({ data }) {
 
         <TabContent currentTab={currentTab}/>
 
-        
+        {/* {posts && posts.map((post, index) => (
+            <div key={index}>
+            <h2>{post.title}</h2>
+            </div>
+        ))} */}
         
         </div>
     );
