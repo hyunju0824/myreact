@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import {Nav} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 // 이렇게 한줄로 써도 됨. props 사용
 export default function  PostList({ data }) {
     const { userId } = useParams();
+    // userId가 똑같은 애들만 가져오기
     const posts = data && data.filter((item) => item.userId.toString() === userId);
     let [currentTab, clickTab] = useState(0);
 
@@ -14,20 +15,26 @@ export default function  PostList({ data }) {
       if(props.currentTab === 0){
         return <div>{posts && posts.map((post, index) => (
           <div key={index}>
-          <h2>{post.title} 꺄하하하하</h2>
+            <ul>
+            <li><Link to={`/postList/${post.userId}/${post.id}`}>{post.title} 전체 id : {post.id}, userid : {post.userId}</Link></li>
+            </ul>
           </div>
       ))}</div>
       }else if(props.currentTab === 1) {
         return <div>{posts && posts.filter(post => !post.completed).map((post, index) => (
                   <div key={index}>
-                      <h2>{post.title}작성중이욤</h2>
+                    <ul>
+                      <li><Link to={`/postList/${post.userId}/${post.id}`}>{post.title} 작성중 id : {post.id}, userid : {post.userId}</Link></li>
+                    </ul>
                   </div>
               ))}
           </div>
       }else if(props.currentTab === 2){
         return <div>{posts && posts.filter(post => post.completed).map((post, index) => (
           <div key={index}>
-              <h2>{post.title}작성완료</h2>
+            <ul>
+            <li><Link to={`/postList/${post.userId}/${post.id}`}>{post.title} 작성 완료 id : {post.id}, userid : {post.userId}</Link></li>
+            </ul>              
           </div>
       ))}
       </div>

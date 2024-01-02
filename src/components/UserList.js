@@ -5,8 +5,7 @@ import { Link } from "react-router-dom";
 function UserList({ data }) {   
     // 중복제거 
     const users = data && data.map((item) => item.userId).filter((userId, index, self) => self.indexOf(userId) === index);
-
-
+   
     return (
       <div>
         {users && <h1> 유저 수 : {users.length}명</h1>}
