@@ -33,7 +33,7 @@ export default function  PostList({ data }) {
         return <div>{posts && posts.filter(post => post.completed).map((post, index) => (
           <div key={index}>
             <ul>
-            <li><Link to={`/postList/${post.userId}/${post.id}`}>{post.title} 작성 완료 id : {post.id}, userid : {post.userId}</Link></li>
+              <li><Link to={`/postList/${post.userId}/${post.id}`}>{post.title} 작성 완료 id : {post.id}, userid : {post.userId}</Link></li>
             </ul>              
           </div>
       ))}
