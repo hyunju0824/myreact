@@ -5,11 +5,14 @@ import UserList from './UserList';
 import PostList from './PostList';
 import { Routes, Route } from "react-router-dom";
 import Details from './Details';
+import { myUserList, myPostList } from '../recoil/atoms/myAtom';
+import { useRecoilState } from "recoil";
+
 // 유효성 검사 구성 요소
 
 function App() {
   // 초기값 = null
-  const [userList, setUserList] = useState(null);
+  const [userList, setUserList] = useRecoilState(myUserList);
 
   useEffect(() => {
     const fetchUserList= async () => {
@@ -31,7 +34,7 @@ function App() {
     fetchUserList();
   }, []);
 
-  const [postList, setPostList] = useState(null);
+  const [postList, setPostList] = useRecoilState(myPostList);
 
   useEffect(() => {
     const fetchPostData = async () => {
@@ -58,10 +61,10 @@ function App() {
       <Routes>
         {/* 처음 실행하면 뜨는 userList 화면 */}
         {/* 이 주소를 부르면 이 컴포넌트를 가져오겠다. */}
-        <Route path="/" element={<UserList data={userList} />} />
+        <Route path="/" element={<UserList />} />
         {/* userId값을 받는 화면에서는 useParams 사용해야함. */}
-        <Route path="/postList/:userId" element={<PostList data={postList} />} />
-        <Route path="/postList/:userId/:id" element={<Details data={postList} />} />
+        <Route path="/postList/:userId" element={<PostList />}/>
+        <Route path="/postList/:userId/:id" element={<Details />} />
       </Routes>
       <h3>app.js끝</h3>
     </div>

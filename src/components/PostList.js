@@ -2,9 +2,12 @@ import React, {useState} from 'react';
 import { Link, useParams } from 'react-router-dom'; 
 import {Nav} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useRecoilValue } from 'recoil';
+import { myPostList } from '../recoil/atoms/myAtom';
 
 // 이렇게 한줄로 써도 됨. props 사용
-export default function PostList({ data }) {
+export default function PostList() {
+    const data = useRecoilValue(myPostList);
     const { userId } = useParams();
     // userId가 똑같은 애들만 가져오기
     const posts = data && data.filter((item) => item.userId.toString() === userId);

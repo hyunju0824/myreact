@@ -1,8 +1,11 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from "react-router-dom";
+import { useRecoilValue } from 'recoil';
+import { myPostList } from '../recoil/atoms/myAtom';
 
-export default function Details({data}){
+export default function Details(){
+    const data = useRecoilValue(myPostList);
     // 게시글 하나
     const {userId, id} = useParams();
     console.log(id);
