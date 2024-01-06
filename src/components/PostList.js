@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom'; 
 import {Nav} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 // 이렇게 한줄로 써도 됨. props 사용
-export default function  PostList({ data }) {
+export default function PostList({ data }) {
     const { userId } = useParams();
     // userId가 똑같은 애들만 가져오기
     const posts = data && data.filter((item) => item.userId.toString() === userId);
@@ -16,7 +16,7 @@ export default function  PostList({ data }) {
         return <div>{posts && posts.map((post, index) => (
           <div key={index}>
             <ul>
-            <li><Link to={`/postList/${post.userId}/${post.id}`}>{post.title} 전체 id : {post.id}, userid : {post.userId}</Link></li>
+              <li><Link to={`/postList/${post.userId}/${post.id}`}>{post.title} 전체 id : {post.id}, userid : {post.userId}</Link></li>
             </ul>
           </div>
       ))}</div>
