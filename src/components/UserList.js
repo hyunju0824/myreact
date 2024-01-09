@@ -19,12 +19,12 @@ const data = useRecoilValue(myUserList);
             {/* <img className="h-10 w-10 rounded-full" src={person.imageUrl} alt="" /> */}
           </div>
           <div className="min-w-0 flex-1">
-            <a href="#" className="focus:outline-none">
+            <div className="focus:outline-none">
               <span className="absolute inset-0" aria-hidden="true" />
               <p className="text-sm font-medium text-gray-900">{item.name}</p>
               <p className="truncate text-sm text-gray-500">{item.username}</p>
               <p className="truncate text-sm text-gray-500">{item.email}</p>
-            </a>
+            </div>
           </div>
         </div>
         </Link>
