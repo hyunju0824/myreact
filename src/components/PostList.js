@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import {Nav} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useRecoilValue } from 'recoil';
-import { myPostList } from '../recoil/atoms/myAtom';
+import { myUserList, myPostList } from '../recoil/atoms/myAtom';
 
 
 const tabs = [
@@ -19,8 +19,14 @@ function classNames(...classes) {
 export default function PostList() {
   const [currentTab, setCurrentTab] = useState(tabs.find(tab => tab.current));
   const data = useRecoilValue(myPostList);
+
   const { userId } = useParams();
   const posts = data && data.filter((item) => item.userId == userId); // '==' 연산자 사용
+  
+  // 유저 이름 등 가져오기
+  // const useUserInfo = userInfo && userInfo.filter((item) => item.userId == userId); // '==' 연산자 사용
+
+
 
   const TabContents = {
     '전체': () => <div>{posts && posts.map((post, index) => (
@@ -39,13 +45,13 @@ export default function PostList() {
   ))}
 </div>,
     '작성 완료': () => <div>{posts && posts.filter(post => post.completed).map((post, index) => (
-      <div key={index}>
-        <ul>
-          <li><Link to={`/postList/${post.userId}/${post.id}`}>{post.title} 작성 완료 id : {post.id}, userid : {post.userId}</Link></li>
-        </ul>              
+          <div key={index}>
+            <ul>
+              <li><Link to={`/postList/${post.userId}/${post.id}`}>{post.title} 작성 완료 id : {post.id}, userid : {post.userId}</Link></li>
+            </ul>              
+          </div>
+      ))}
       </div>
-  ))}
-  </div>
   };
 
   const TabContent = TabContents[currentTab.name];

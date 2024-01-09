@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import axios from 'axios';
 import { useRecoilValue, useRecoilState } from 'recoil';
-import { myPostList } from '../recoil/atoms/myAtom';
+import { myUserList, myPostList } from '../recoil/atoms/myAtom';
 import { myCommentList } from '../recoil/atoms/myAtom';
 function Details() {
     const {userId, postId} = useParams();
@@ -37,14 +37,30 @@ function Details() {
     const index = users.findIndex(item => item.id.toString() === postId);
     const prev = users[index-1];
     const next = users[index+1];
+
+    // 유저 이름 등 가져오기
+  const userInfo = useRecoilValue(myUserList);
+  const useUserInfo = userInfo && userInfo.find(user => user.id == userId);
+
     return (
         <div>
+           
             {detail && detail.map((item) => (
-                <div key={item.id}>   
-                    <p>ID : {item.userId}</p>
-                    <p>글 번호 : {item.id}</p>
-                    <p>제목 : {item.title}</p>
-                </div>
+                <div key={item.id} className="border-b border-gray-200 pb-5">
+                <h2 className="font-semibold leading-6 text-gray-900">Title : {item.title}</h2>
+                {/* <p>ID : {item.userId}</p> */}
+                {useUserInfo && <p>User name : {useUserInfo.username}</p>}
+                <p className="mt-2 max-w-4xl text-sm text-gray-500">
+                  Workcation is a property rental website. Etiam ullamcorper massa viverra consequat, consectetur id nulla tempus.
+                  Fringilla egestas justo massa purus sagittis malesuada.
+                </p>
+                
+              </div>
+                // <div key={item.id}>   
+                //     <p>ID : {item.userId}</p>
+                //     <p>글 번호 : {item.id}</p>
+                //     <p>제목 : {item.title}</p>
+                // </div>
             ))}
             {prev ? (<p><Link to={`/postList/${prev.userId}/${prev.id}`}>이전글 : {prev.title}</Link></p>) : (<p>이전글 없음</p>)}
             {next ? (<p><Link to={`/postList/${next.userId}/${next.id}`}>다음글 : {next.title}</Link></p>) : (<p>다음글 없음</p>)}
