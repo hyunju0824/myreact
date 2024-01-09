@@ -7,3 +7,7 @@ export const myPostList = atom({
     key : "myPostList",
     default : []
 })
+export const myCommentList = atom({
+    key: 'myCommentList',
+    default: {},
+  });

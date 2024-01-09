@@ -57,9 +57,8 @@ function App() {
   return (
     <div>
     <h1 className="text-3xl font-bold underline">
-      Hello world!
+      나의 과제 :)
     </h1>
-      <h3>app.js시작</h3>
       {/* 라우터 */}
       <Routes>
         {/* 처음 실행하면 뜨는 userList 화면 */}
@@ -67,9 +66,8 @@ function App() {
         <Route path="/" element={<UserList />} />
         {/* userId값을 받는 화면에서는 useParams 사용해야함. */}
         <Route path="/postList/:userId" element={<PostList />}/>
-        <Route path="/postList/:userId/:id" element={<Details />} />
+        <Route path="/postList/:userId/:postId" element={<Details />} />
       </Routes>
-      <h3>app.js끝</h3>
     </div>
   );
 }
