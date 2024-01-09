@@ -8,9 +8,15 @@ import { myPostList } from '../recoil/atoms/myAtom';
 // 이렇게 한줄로 써도 됨. props 사용
 export default function PostList() {
     const data = useRecoilValue(myPostList);
+
+    console.log('Data:', data); // 이 부분 추가
+
     const { userId } = useParams();
+
+    console.log('UserId:', userId); // 이 부분 추가
     // userId가 똑같은 애들만 가져오기
-    const posts = data && data.filter((item) => item.userId.toString() === userId);
+    // const posts = data && data.filter((item) => item.userId.toString() === userId);
+    const posts = data && data.filter((item) => item.userId == userId); // '==' 연산자 사용
     let [currentTab, clickTab] = useState(0);
 
 

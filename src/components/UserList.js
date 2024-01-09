@@ -10,9 +10,9 @@ export default function UserList() {
 const data = useRecoilValue(myUserList);
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-      {data.map((item) => (
+      {data && data.map((item, index) => (
+        <Link to={`/postList/${item.id}`} key={index}>
         <div
-          key={item.id}
           className="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400"
         >
           <div className="flex-shrink-0">
@@ -27,6 +27,7 @@ const data = useRecoilValue(myUserList);
             </a>
           </div>
         </div>
+        </Link>
       ))}
     </div>
   )
