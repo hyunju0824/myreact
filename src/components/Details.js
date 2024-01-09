@@ -7,6 +7,7 @@ import { myUserList, myPostList } from '../recoil/atoms/myAtom';
 import { myCommentList } from '../recoil/atoms/myAtom';
 
 import UserComment from './UserComment';
+import UserCommentList from './UserCommentList';
 
 function Details() {
     const {userId, postId} = useParams();
@@ -67,6 +68,7 @@ function Details() {
             {prev ? (<p><Link to={`/postList/${prev.userId}/${prev.id}`}>이전글 : {prev.title}</Link></p>) : (<p>이전글 없음</p>)}
             {next ? (<p><Link to={`/postList/${next.userId}/${next.id}`}>다음글 : {next.title}</Link></p>) : (<p>다음글 없음</p>)}
             <UserComment></UserComment>
+            <UserCommentList></UserCommentList>
             <ul role="list" className="divide-y divide-gray-100">
           {comments[postId]?.length > 0 
             ? comments[postId].map((comment) => (
