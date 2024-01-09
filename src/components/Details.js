@@ -5,6 +5,9 @@ import axios from 'axios';
 import { useRecoilValue, useRecoilState } from 'recoil';
 import { myUserList, myPostList } from '../recoil/atoms/myAtom';
 import { myCommentList } from '../recoil/atoms/myAtom';
+
+import UserComment from './UserComment';
+
 function Details() {
     const {userId, postId} = useParams();
     const [comments, setComments] = useRecoilState(myCommentList);
@@ -44,7 +47,6 @@ function Details() {
 
     return (
         <div>
-           
             {detail && detail.map((item) => (
                 <div key={item.id} className="border-b border-gray-200 pb-5">
                 <h2 className="font-semibold leading-6 text-gray-900">Title : {item.title}</h2>
@@ -64,6 +66,7 @@ function Details() {
             ))}
             {prev ? (<p><Link to={`/postList/${prev.userId}/${prev.id}`}>이전글 : {prev.title}</Link></p>) : (<p>이전글 없음</p>)}
             {next ? (<p><Link to={`/postList/${next.userId}/${next.id}`}>다음글 : {next.title}</Link></p>) : (<p>다음글 없음</p>)}
+            <UserComment></UserComment>
             <ul role="list" className="divide-y divide-gray-100">
           {comments[postId]?.length > 0 
             ? comments[postId].map((comment) => (
