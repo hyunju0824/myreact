@@ -1,4 +1,9 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useState, useEffect } from 'react'
+// 댓글
+import { useRecoilState, useRecoilValue } from 'recoil'
+import {myCommentSave} from '../recoil/atoms/myAtom'
+
+
 import {
   FaceFrownIcon,
   FaceSmileIcon,
@@ -76,8 +81,13 @@ export default function UserComment() {
   const [selected, setSelected] = useState(moods[5])
   
   // 
-  const [comments, setComments] = useState([]);
+  const [comments, setComments] = useRecoilState(myCommentSave);
   const [newComment, setNewComment] = useState("");
+
+  //새로고침해도 안사라지게..
+  useEffect(() => {
+    localStorage.setItem('comments', JSON.stringify(comments));
+  }, [comments]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -85,6 +95,9 @@ export default function UserComment() {
     setNewComment("");
   };
   // 
+
+  // 리코일 댓글
+  const myCommentSaveHaha = useRecoilValue(myCommentSave);
 
   return (
     <div className="">
@@ -220,6 +233,10 @@ export default function UserComment() {
       </div>
       
           {/*  */}
+
+          {/* 리코일 댓글확인 */}
+          
+
           <div>
         <ul role="list" className="divide-y divide-gray-100">
           {people.map((person) => (

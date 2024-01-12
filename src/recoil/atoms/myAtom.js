@@ -11,3 +11,13 @@ export const myCommentList = atom({
     key: 'myCommentList',
     default: {},
   });
+
+const loadPersistedComments = () => {
+    const savedComments = localStorage.getItem('comments');
+    return savedComments ? JSON.parse(savedComments) : [];
+};
+
+export const myCommentSave = atom({
+   key: 'myCommentSave',
+   default: loadPersistedComments(),
+});
