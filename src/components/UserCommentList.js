@@ -1,3 +1,4 @@
+
 const people = [
     {
       name: 'Leslie Alexander',
@@ -43,7 +44,7 @@ const people = [
     },
   ]
   
-  export default function UserCommentList() {
+  export default function UserCommentList({UserComment}) {
     return (
       <div>
         <ul role="list" className="divide-y divide-gray-100">
