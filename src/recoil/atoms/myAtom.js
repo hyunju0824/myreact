@@ -7,17 +7,16 @@ export const myPostList = atom({
     key : "myPostList",
     default : []
 })
+// 댓글List
 export const myCommentList = atom({
     key: 'myCommentList',
-    default: {},
-  });
-
-const loadPersistedComments = () => {
-    const savedComments = localStorage.getItem('comments');
-    return savedComments ? JSON.parse(savedComments) : [];
-};
-
-export const myCommentSave = atom({
-   key: 'myCommentSave',
-   default: loadPersistedComments(),
+    default: [],
 });
+// 
+export const myCommentUpdate = atom({
+   key: 'myCommentUpdate',
+   default: '',
+});
+
+
+
