@@ -47,6 +47,14 @@ export default function CommentInput({postId}) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (nameInput.trim() === "") {
+      alert("이름을 입력해주세요.");
+      return;
+    }
+    if (commentInput.trim() === "") {
+      alert("댓글을 입력해주세요.");
+      return;
+    }
     const newId = Math.max(0, ...setCommentId.map(comment => comment.id)) + 1;
     const newComment = {
       postId : postId,
