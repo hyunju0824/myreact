@@ -105,7 +105,6 @@ export default function CommentInput({postId}) {
               id='comment'
               className='block w-30 resize-none border-0 bg-transparent py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6  shadow-inner'
               placeholder="Add your name..."
-              defaultValue={''}
 
             ></textarea>
             <label htmlFor="comment" className="sr-only">
@@ -119,7 +118,6 @@ export default function CommentInput({postId}) {
               id="comment"
               className="block w-full resize-none border-0 bg-transparent py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
               placeholder="Add your comment..."
-              defaultValue={''}
               onKeyDown ={handleKeyDown}
             />
             <div className="py-2" aria-hidden="true">
