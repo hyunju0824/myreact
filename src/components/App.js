@@ -3,6 +3,7 @@ import axios from 'axios';
 import '../App.css';
 import UserList from './UserList';
 import PostList from './PostList';
+import Header from './Header';
 import { Routes, Route } from "react-router-dom";
 import Details from './Details';
 import { myUserList, myPostList } from '../recoil/atoms/myAtom';
@@ -56,8 +57,9 @@ function App() {
   
   return (
     <div>
+    
     <h1 className="text-3xl font-bold underline">
-      나의 과제 :)
+      <Header/>
     </h1>
       {/* 라우터 */}
       <Routes>
@@ -67,6 +69,7 @@ function App() {
         {/* userId값을 받는 화면에서는 useParams 사용해야함. */}
         <Route path="/postList/:userId" element={<PostList />}/>
         <Route path="/postList/:userId/:postId" element={<Details />} />
+        <Route path="/header" element={<UserList/>} />
       </Routes>
     </div>
   );
