@@ -22,11 +22,6 @@ export default function PostList() {
 
   const { userId } = useParams();
   const posts = data && data.filter((item) => item.userId == userId); // '==' 연산자 사용
-  
-  // 유저 이름 등 가져오기
-  // const useUserInfo = userInfo && userInfo.filter((item) => item.userId == userId); // '==' 연산자 사용
-
-
 
   const TabContents = {
     '전체': () => <div>{posts && posts.map((post, index) => (

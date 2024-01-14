@@ -114,10 +114,7 @@ export default function CommentInput({postId}) {
               defaultValue={''}
               onKeyDown ={handleKeyDown}
             />
-
-            {/* Spacer element to match the height of the toolbar */}
             <div className="py-2" aria-hidden="true">
-              {/* Matches height of button in toolbar (1px border + 36px content height) */}
               <div className="py-px">
                 <div className="h-9" />
               </div>

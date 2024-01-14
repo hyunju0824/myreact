@@ -6,11 +6,6 @@ import { useRecoilValue, useRecoilState } from 'recoil';
 import { myUserList, myPostList } from '../recoil/atoms/myAtom';
 import CommentSection from './CommentSection';
 
-// import { myCommentList } from '../recoil/atoms/myAtom';
-
-// import UserComment from './UserComment';
-// import UserCommentList from './UserCommentList';
-
 function Details() {
     const {userId, postId} = useParams();
 

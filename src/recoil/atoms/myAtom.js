@@ -3,7 +3,6 @@ import { recoilPersist } from 'recoil-persist';
 
 const { persistAtom } = recoilPersist();
 
-
 export const myUserList = atom({
     key : "myUserList",
     default : []
