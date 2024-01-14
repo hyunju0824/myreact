@@ -20,16 +20,13 @@ function Details() {
     // 유저 이름 등 가져오기
   const userInfo = useRecoilValue(myUserList);
   const useUserInfo = userInfo && userInfo.find(user => user.id == userId);
-
+  console.log(data);
     return (
         <div>
             {detail && detail.map((item) => (
                 <div key={item.id} className="border-b border-gray-200 pb-5">
                 <h2 className="font-semibold leading-6 text-gray-900">Title : {item.title}</h2>
                 {useUserInfo && <p>User name : {useUserInfo.username}</p>}
-                <p className="mt-2 max-w-4xl text-sm text-gray-500">
-                  {item.body}
-                </p>
               </div>
             ))}
             {prev ? (<p><Link to={`/postList/${prev.userId}/${prev.id}`}>이전글 : {prev.title}</Link></p>) : (<p>이전글 없음</p>)}

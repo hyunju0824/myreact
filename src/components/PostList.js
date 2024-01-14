@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import { Link, useParams } from 'react-router-dom'; 
-import {Nav} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useRecoilValue } from 'recoil';
 import { myUserList, myPostList } from '../recoil/atoms/myAtom';
