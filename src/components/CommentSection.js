@@ -4,11 +4,9 @@ import CommentList from "./CommentList";
 export default function CommentSection({postId}) {
     return (
       <div>
-        {/* <CommentInput postId={postId} />
-        <CommentList postId={postId} />        */}
+        <CommentInput postId={postId}/>
+        <CommentList postId={postId} />
         {/* <CommentInput/> */}
-        <CommentList postId={postId}/>
-
       </div>  
     );
 }
