@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useState, useRef } from 'react'
 import {
   FaceFrownIcon,
   FaceSmileIcon,
@@ -13,6 +13,9 @@ import { Listbox, Transition } from '@headlessui/react'
 // 댓글 업데이트
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { myCommentList } from '../recoil/atoms/myAtom';
+
+// 댓글 작성 사진 
+import logo from '../logo.png';
 
 const moods = [
   { name: 'Excited', value: 'excited', icon: FireIcon, iconColor: 'text-white', bgColor: 'bg-red-500' },
@@ -37,6 +40,10 @@ export default function CommentInput({postId}) {
   console.log(useMyCommentList);
 
   const [commentInput, setCommentInput] = useState('');
+  const [nameInput, setNameInput] = useState('');
+
+  // 댓글 작성 후 스크롤 밑으로
+  const CommentScroll = useRef(null);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -44,7 +51,7 @@ export default function CommentInput({postId}) {
     const newComment = {
       postId : postId,
       id : newId,
-      name : "울랄라",
+      name : nameInput,
       body : commentInput,
     };
     commentUpdate((oldComments) => {
@@ -54,20 +61,45 @@ export default function CommentInput({postId}) {
       };
     });
     setCommentInput('');
+    setNameInput('');
+
+    CommentScroll.current.scrollIntoView({ behavior: 'smooth' });
   };
+
+  // 엔터키로 댓글 Post
+  const handleKeyDown = (event) => {
+    if(event.key === 'Enter'){
+      handleSubmit(event);
+    }
+  }
+
 
   return (
     <div className="flex items-start space-x-4">
       <div className="flex-shrink-0">
         <img
           className="inline-block h-10 w-10 rounded-full"
-          src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+          src= {logo}
           alt=""
         />
       </div>
       <div className="min-w-0 flex-1">
         <form action="#" className="relative" onSubmit={handleSubmit}>
           <div className="overflow-hidden rounded-lg shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-indigo-600">
+            <label htmlFor='comment' className="sr-only">
+              Add your name
+              </label>
+            <textarea
+              name='nameInput'
+              value={nameInput}
+              onChange={event => setNameInput(event.target.value)}
+              rows={1}
+              id='comment'
+              className='block w-30 resize-none border-0 bg-transparent py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6  shadow-inner'
+              placeholder="Add your name..."
+              defaultValue={''}
+
+            ></textarea>
             <label htmlFor="comment" className="sr-only">
               Add your comment
             </label>
@@ -80,6 +112,7 @@ export default function CommentInput({postId}) {
               className="block w-full resize-none border-0 bg-transparent py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
               placeholder="Add your comment..."
               defaultValue={''}
+              onKeyDown ={handleKeyDown}
             />
 
             {/* Spacer element to match the height of the toolbar */}
@@ -185,6 +218,7 @@ export default function CommentInput({postId}) {
           </div>
         </form>
       </div>
+      <div ref={CommentScroll} />
     </div>
   )
 }
