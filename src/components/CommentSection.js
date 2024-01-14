@@ -6,7 +6,6 @@ export default function CommentSection({postId}) {
       <div>
         <CommentInput postId={postId}/>
         <CommentList postId={postId} />
-        {/* <CommentInput/> */}
       </div>  
     );
 }

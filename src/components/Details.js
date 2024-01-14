@@ -14,30 +14,6 @@ import CommentSection from './CommentSection';
 function Details() {
     const {userId, postId} = useParams();
 
-    // const [comments, setComments] = useRecoilState(myCommentList);
-    // console.log(postId);
-    // const getComments = (postId) => {
-    //   return axios.get(`https://jsonplaceholder.typicode.com/comments?postId=${postId}`)
-    //     .then(response => response.data)
-    //     .catch(error => {
-    //       console.error('Error:', error);
-    //       return [];
-    //     });
-    // };
-
-    // useEffect(() => {
-    //   if (!comments[postId]) {
-    //     getComments(postId).then(data => {
-    //       setComments(prevComments => ({
-    //         ...prevComments,
-    //         [postId]: data
-    //       }));
-    //     });
-    //   }
-    //   console.log(comments);
-    // }, [postId, comments, setComments]);
-  
-
     const data = useRecoilValue(myPostList);
     // 게시글 하나
     const users = data && data.filter((item) => item.userId.toString() === userId);
@@ -60,24 +36,10 @@ function Details() {
                 <p className="mt-2 max-w-4xl text-sm text-gray-500">
                   {item.body}
                 </p>
-                
               </div>
-                // <div key={item.id}>   
-                //     <p>ID : {item.userId}</p>
-                //     <p>글 번호 : {item.id}</p>
-                //     <p>제목 : {item.title}</p>
-                // </div>
             ))}
             {prev ? (<p><Link to={`/postList/${prev.userId}/${prev.id}`}>이전글 : {prev.title}</Link></p>) : (<p>이전글 없음</p>)}
             {next ? (<p><Link to={`/postList/${next.userId}/${next.id}`}>다음글 : {next.title}</Link></p>) : (<p>다음글 없음</p>)}
-            {/* <UserComment></UserComment> */}
-            {/* <UserCommentList></UserCommentList> */}
-        {/* <a
-          href="#"
-          className="flex w-full items-center justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0"
-        >
-          View all
-        </a> */}
         <CommentSection postId={postId}/>
         </div>
  );

@@ -1,6 +1,3 @@
-import React from 'react';
-import { useRecoilState } from 'recoil';
-import { myCommentList, myCommentUpdate } from '../recoil/atoms/myAtom';
 import { Fragment, useState } from 'react'
 import {
   FaceFrownIcon,
@@ -12,6 +9,10 @@ import {
   XMarkIcon,
 } from '@heroicons/react/20/solid'
 import { Listbox, Transition } from '@headlessui/react'
+
+// 댓글 업데이트
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { myCommentList } from '../recoil/atoms/myAtom';
 
 const moods = [
   { name: 'Excited', value: 'excited', icon: FireIcon, iconColor: 'text-white', bgColor: 'bg-red-500' },
@@ -26,26 +27,30 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function CommentInput() {
+export default function CommentInput({postId}) {
   const [selected, setSelected] = useState(moods[5])
-    //댓글
-    const CommentInput = ({ postId }) => {
-        // 1번 댓글 
-        const [myCommentList, setMyCommentList] = useRecoilState(myCommentList);
-        // 작성한 댓글
-        const [CommentUpdate, setCommentUpdate] = useRecoilState(myCommentUpdate);
-      
-        const handleCommentSubmit = () => {
-            // Recoil을 사용하여 댓글 리스트 업데이트
-            setCommentUpdate({
-              ...CommentUpdate,
-              [postId]: [...(CommentUpdate[postId] || []), { text: myCommentList, id: 'currentUser' }],
-            });
-        
-            // 사용자가 입력한 댓글 상태 초기화
-            setCommentUpdate('');
-          }};
-        
+
+  // 댓글 업데이트
+  const commentUpdate = useSetRecoilState(myCommentList);
+  const useMyCommentList = useRecoilValue(myCommentList);
+  const setCommentId = useMyCommentList[postId];
+  console.log(useMyCommentList);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const newId = Math.max(0, ...setCommentId.map(comment => comment.id)) + 1;
+    const newComment = {
+      postId : postId,
+      id : newId,
+      name : "울랄라",
+      body : event.target.elements.commentInput.value,
+    };
+    commentUpdate((oldComments) => {
+      return {
+        ...oldComments,
+        [postId]: [...oldComments[postId], newComment]
+      };
+    });
+  };
 
   return (
     <div className="flex items-start space-x-4">
@@ -57,14 +62,14 @@ export default function CommentInput() {
         />
       </div>
       <div className="min-w-0 flex-1">
-        <form action="#" className="relative">
+        <form action="#" className="relative" onSubmit={handleSubmit}>
           <div className="overflow-hidden rounded-lg shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-indigo-600">
             <label htmlFor="comment" className="sr-only">
               Add your comment
             </label>
             <textarea
+              name ="commentInput"
               rows={3}
-              name="comment"
               id="comment"
               className="block w-full resize-none border-0 bg-transparent py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
               placeholder="Add your comment..."
