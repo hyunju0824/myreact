@@ -35,6 +35,9 @@ export default function CommentInput({postId}) {
   const useMyCommentList = useRecoilValue(myCommentList);
   const setCommentId = useMyCommentList[postId];
   console.log(useMyCommentList);
+
+  const [commentInput, setCommentInput] = useState('');
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const newId = Math.max(0, ...setCommentId.map(comment => comment.id)) + 1;
@@ -42,7 +45,7 @@ export default function CommentInput({postId}) {
       postId : postId,
       id : newId,
       name : "울랄라",
-      body : event.target.elements.commentInput.value,
+      body : commentInput,
     };
     commentUpdate((oldComments) => {
       return {
@@ -50,6 +53,7 @@ export default function CommentInput({postId}) {
         [postId]: [...oldComments[postId], newComment]
       };
     });
+    setCommentInput('');
   };
 
   return (
@@ -69,6 +73,8 @@ export default function CommentInput({postId}) {
             </label>
             <textarea
               name ="commentInput"
+              value={commentInput}
+              onChange={event => setCommentInput(event.target.value)}
               rows={3}
               id="comment"
               className="block w-full resize-none border-0 bg-transparent py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"

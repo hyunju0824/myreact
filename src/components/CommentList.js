@@ -27,10 +27,23 @@ import Details from './Details';
         }, [postId, comments, setComments]);
 
     // 댓글 총 개수
+    console.log("포스트 아이디는"+postId);
 
+    const total = useRecoilValue(myCommentList);
+    const totalComments = total[postId];
     
+    let totalTotal = 0;
+
+    if (totalComments) {
+      totalTotal = totalComments.length;
+    } 
+
+
+    console.log("댓글 개수"+ totalTotal);
+        
     return (
       <div>
+        <p>댓글 : {totalTotal}개</p>
         <ul role="list" className="divide-y divide-gray-100">
           {comments[postId]?.length > 0 
               ? comments[postId].map((item) => (
@@ -52,12 +65,6 @@ import Details from './Details';
         : "댓글이 없습니다."
         }
         </ul>
-        {/* <a
-          href="#"
-          className="flex w-full items-center justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0"
-        >
-          View all
-        </a> */}
       </div>
     )
   }
