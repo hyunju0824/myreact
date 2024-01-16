@@ -56,7 +56,7 @@ function App() {
   
   
   return (
-    <div>
+    <div className='px-80'>
     
     <h1 className="text-3xl font-bold underline">
       <Header/>
