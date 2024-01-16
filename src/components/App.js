@@ -56,12 +56,12 @@ function App() {
   
   
   return (
-    <div className='px-80'>
-    
+    <div>
     <h1 className="text-3xl font-bold underline">
       <Header/>
     </h1>
       {/* 라우터 */}
+      <div className='px-80'>
       <Routes>
         {/* 처음 실행하면 뜨는 userList 화면 */}
         {/* 이 주소를 부르면 이 컴포넌트를 가져오겠다. */}
@@ -71,6 +71,7 @@ function App() {
         <Route path="/postList/:userId/:postId" element={<Details />} />
         <Route path="/header" element={<UserList/>} />
       </Routes>
+      </div>
     </div>
   );
 }
